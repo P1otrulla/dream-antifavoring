@@ -11,7 +11,7 @@ import java.util.List;
 public class PluginConfig implements ReloadableConfig {
 
     @Description({
-            "# Konfiguracja pluginu dreamAntiFavoring",
+            "## dreamAntiFavoring (Main-Config) ##",
             "# Wspieramy PlaceholderAPI: ",
             "# Wspieramy miniMessage: https://docs.adventure.kyori.net/minimessage/",
             " ",
