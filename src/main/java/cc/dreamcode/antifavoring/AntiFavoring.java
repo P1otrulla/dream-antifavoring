@@ -8,6 +8,7 @@ import cc.dreamcode.antifavoring.placeholder.PlaceholderApiReplacer;
 import cc.dreamcode.antifavoring.placeholder.Placeholders;
 import com.google.common.base.Stopwatch;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Server;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -51,6 +52,8 @@ public final class AntiFavoring extends JavaPlugin {
         this.itemFactory = new AntiFavoringItemFactory(this.placeholders, this.miniMessage, this.config);
 
         server.getPluginManager().registerEvents(new AntiFavoringController(this.itemFactory), this);
+
+        Metrics metrics = new Metrics(this, 16768);
 
         this.getLogger().info("Successfully loaded in " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + "ms");
     }
