@@ -12,6 +12,7 @@ public class PluginConfig implements ReloadableConfig {
 
     @Description({
             "# Konfiguracja pluginu dreamAntiFavoring",
+            "# Wspieramy PlaceholderAPI: ",
             "# Wspieramy miniMessage: https://docs.adventure.kyori.net/minimessage/",
             " ",
             "# Format do placeholdera {DATE}"

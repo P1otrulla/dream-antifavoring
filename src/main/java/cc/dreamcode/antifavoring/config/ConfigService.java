@@ -32,10 +32,4 @@ public class ConfigService {
 
         return config;
     }
-
-    public void reload() {
-        for (ReloadableConfig config : this.configs) {
-            load(config);
-        }
-    }
 }

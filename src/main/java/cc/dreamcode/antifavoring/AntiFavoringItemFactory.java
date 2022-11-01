@@ -1,6 +1,7 @@
 package cc.dreamcode.antifavoring;
 
 import cc.dreamcode.antifavoring.config.PluginConfig;
+import cc.dreamcode.antifavoring.legacy.Legacy;
 import cc.dreamcode.antifavoring.legacy.LegacyColorProcessor;
 import cc.dreamcode.antifavoring.placeholder.Placeholders;
 import net.kyori.adventure.text.Component;
@@ -25,11 +26,6 @@ public final class AntiFavoringItemFactory {
 
     private final SimpleDateFormat dateFormat;
 
-    public static final LegacyComponentSerializer AMPERSAND_SERIALIZER = LegacyComponentSerializer.builder()
-            .hexColors()
-            .useUnusualXRepeatedCharacterHexFormat()
-            .build();
-
     public AntiFavoringItemFactory(Placeholders placeholders, MiniMessage miniMessage, PluginConfig config) {
         this.placeholders = placeholders;
         this.miniMessage = miniMessage;
@@ -47,7 +43,7 @@ public final class AntiFavoringItemFactory {
                         .replace("{ADMIN}", player.getName())
                         .replace("{AMOUNT}", String.valueOf(itemStack.getAmount())))
                 .map(line -> this.placeholders.format(player, line))
-                .map(line -> AMPERSAND_SERIALIZER.serialize(this.miniMessage.deserialize(line)))
+                .map(line -> Legacy.AMPERSAND_SERIALIZER.serialize(this.miniMessage.deserialize(line)))
                 .collect(Collectors.toList());
 
         ItemStack newItemStack = itemStack.clone();

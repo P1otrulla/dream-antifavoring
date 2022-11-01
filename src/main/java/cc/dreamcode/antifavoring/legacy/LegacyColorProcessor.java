@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 public final class LegacyColorProcessor implements UnaryOperator<Component> {
 
-    public static final LegacyComponentSerializer AMPERSAND_SERIALIZER = LegacyComponentSerializer.builder()
+    private static final LegacyComponentSerializer AMPERSAND_SERIALIZER = LegacyComponentSerializer.builder()
             .character('&')
             .hexColors()
             .useUnusualXRepeatedCharacterHexFormat()
