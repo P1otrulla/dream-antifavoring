@@ -71,7 +71,7 @@ tasks {
 }
 
 tasks.withType<ShadowJar> {
-    archiveFileName.set("dreamAntiFavoring v${project.version}.jar")
+    archiveFileName.set("dreamAntiFavoring_${project.version}_1.8-1.19.jar")
 
     exclude(
         "org/intellij/lang/annotations/**",
