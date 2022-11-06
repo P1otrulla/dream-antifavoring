@@ -16,7 +16,7 @@ public final class AntiFavoringController implements Listener {
     }
 
     @EventHandler
-    void onInventoryClick(InventoryCreativeEvent event) {
+    void onCreativeItemMove(InventoryCreativeEvent event) {
         final HumanEntity humanEntity = event.getWhoClicked();
         if (!(humanEntity instanceof Player)) {
             return;
