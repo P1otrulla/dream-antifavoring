@@ -4,9 +4,7 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.Inventory;
+import org.bukkit.event.inventory.InventoryCreativeEvent;
 import org.bukkit.inventory.ItemStack;
 
 public final class AntiFavoringController implements Listener {
@@ -18,24 +16,19 @@ public final class AntiFavoringController implements Listener {
     }
 
     @EventHandler
-    void onInventoryClick(InventoryClickEvent event) {
+    void onInventoryClick(InventoryCreativeEvent event) {
         final HumanEntity humanEntity = event.getWhoClicked();
         if (!(humanEntity instanceof Player)) {
             return;
         }
 
         final Player player = (Player) humanEntity;
-        final Inventory clickedInventory = event.getClickedInventory();
-        if (clickedInventory == null || !clickedInventory.getType().equals(InventoryType.CREATIVE)) {
-            return;
-        }
-
-        final ItemStack holdingItem = event.getView().getCursor();
-        if (holdingItem == null || player.hasPermission("antifavoring.spy")) {
+        final ItemStack holdingItem = event.getCursor();
+        if (player.hasPermission("antifavoring.spy")) {
             return;
         }
 
         final ItemStack replacedItem = this.itemFactory.createItemStack(player, holdingItem);
-        event.getView().setCursor(replacedItem);
+        event.setCursor(replacedItem);
     }
 }
