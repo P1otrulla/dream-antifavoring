@@ -1,9 +1,13 @@
 package cc.dreamcode.antifavoring;
 
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 public final class AntiFavoringController implements Listener {
 
@@ -14,15 +18,24 @@ public final class AntiFavoringController implements Listener {
     }
 
     @EventHandler
-    void onFavoring(PlayerDropItemEvent event) {
-        Player player = event.getPlayer();
-
-        if (event.getItemDrop().getItemStack() == null) {
+    void onInventoryClick(InventoryClickEvent event) {
+        final HumanEntity humanEntity = event.getWhoClicked();
+        if (!(humanEntity instanceof Player)) {
             return;
         }
 
-        if (player.hasPermission("antifavoring.spy")) {
-            event.getItemDrop().setItemStack(this.itemFactory.createItemStack(player, event.getItemDrop().getItemStack()));
+        final Player player = (Player) humanEntity;
+        final Inventory clickedInventory = event.getClickedInventory();
+        if (clickedInventory == null || !clickedInventory.getType().equals(InventoryType.CREATIVE)) {
+            return;
         }
+
+        final ItemStack holdingItem = event.getView().getCursor();
+        if (holdingItem == null || player.hasPermission("antifavoring.spy")) {
+            return;
+        }
+
+        final ItemStack replacedItem = this.itemFactory.createItemStack(player, holdingItem);
+        event.getView().setCursor(replacedItem);
     }
 }
