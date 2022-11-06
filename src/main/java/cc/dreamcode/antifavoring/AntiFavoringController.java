@@ -17,18 +17,14 @@ public final class AntiFavoringController implements Listener {
 
     @EventHandler
     void onCreativeItemMove(InventoryCreativeEvent event) {
-        final HumanEntity humanEntity = event.getWhoClicked();
+        HumanEntity humanEntity = event.getWhoClicked();
         if (!(humanEntity instanceof Player)) {
             return;
         }
 
-        final Player player = (Player) humanEntity;
-        final ItemStack holdingItem = event.getCursor();
-        if (player.hasPermission("antifavoring.spy")) {
-            return;
-        }
+        Player player = (Player) humanEntity;
+        ItemStack holdingItem = event.getCursor();
 
-        final ItemStack replacedItem = this.itemFactory.createItemStack(player, holdingItem);
-        event.setCursor(replacedItem);
+        event.setCursor(this.itemFactory.createItemStack(player, holdingItem));
     }
 }

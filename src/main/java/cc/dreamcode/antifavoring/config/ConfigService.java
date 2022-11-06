@@ -4,8 +4,6 @@ import net.dzikoysk.cdn.Cdn;
 import net.dzikoysk.cdn.CdnFactory;
 
 import java.io.File;
-import java.util.HashSet;
-import java.util.Set;
 
 public class ConfigService {
 
@@ -14,7 +12,6 @@ public class ConfigService {
             .getSettings()
             .build();
 
-    private final Set<ReloadableConfig> configs = new HashSet<>();
     private final File dataFolder;
 
     public ConfigService(File dataFolder) {
@@ -27,8 +24,6 @@ public class ConfigService {
 
         cdn.render(config, config.resource(this.dataFolder))
                 .orThrow(RuntimeException::new);
-
-        this.configs.add(config);
 
         return config;
     }

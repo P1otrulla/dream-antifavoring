@@ -53,6 +53,7 @@ bukkit {
     name = "dreamAntiFavoring"
     version = "${project.version}"
     softDepend = listOf("PlaceholderAPI")
+    description = "DreamCode.cc - https://discord.gg/dreamcode"
 }
 
 java {
