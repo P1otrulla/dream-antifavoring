@@ -35,6 +35,10 @@ public final class AntiFavoringItemFactory {
     }
 
     public ItemStack createItemStack(Player player, ItemStack itemStack) {
+        if (itemStack.getItemMeta() == null) {
+            return itemStack;
+        }
+
         String formattedDate = this.dateFormat.format(System.currentTimeMillis());
 
         List<String> parsedLore = this.config.lore
